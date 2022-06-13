@@ -13,7 +13,7 @@
 
         <div class="container">
             <span><% if(message != ""){ message } %></span>
-            <form method="POST" action="/edit/<%= filme.id %>">
+            <form method="POST" action="/editar/<%= filme.id %>">
                 <div class="item">
                     <input type="text" placeholder="Digite o nome do filme" name="nome" value="<%= filme.nome %>" required>
                 </div>
