@@ -13,12 +13,14 @@ const getAll = async (req, res) => {
     const filmes = await Filme.findAll(orderById); //aguardando
     res.render("index", {
       filmes,
+      //filmesPut: null,
+      //filmesDel: null,
       message,
       type,
       filmeSearch: [],
     });
   } catch (err) {
-    //deu erro
+    //deu erro, venha nesse caminho
     res.status(500).send({ err: err.message }); //vem do objeto erro
   }
 };
@@ -28,7 +30,7 @@ const getById = async (req, res) => {
   try {
     const filme = await Filme.findByPk(req.params.id); //encontrando o filme que foi escolhido pelo id, findByPk procurar pela chave primaria que é o id, e esse id vai chegar por parametro
     const filmes = await Filme.findAll(orderById);//só para melhorar a vizualização
-    res.render("details", {
+    res.render("detalhes", {
       filme,
       message,
       type,
@@ -41,16 +43,16 @@ const getById = async (req, res) => {
 };
 
 //rota de criação do filme
-const create = (req, res) => {
+const criar = (req, res) => {
   try {
-    res.render("create", { message, type });
+    res.render("criar", { message, type });
   } catch (err) {
     //deu erro, venha nesse caminho
     res.status(500).send({ err: err.message }); //vem do objeto erro
   }
 };
 
-const creation = async (req, res) => {
+const criacao = async (req, res) => {
   try {
     const filme = req.body; //a requisição que vem do body, pegando os dados que vem do body
     if (
@@ -71,16 +73,16 @@ const creation = async (req, res) => {
 };
 
 //rota editar filme
-const edit1 = async (req, res) => {
+const editar1 = async (req, res) => {
   const filme = await Filme.findByPk(req.params.id);
 
   if (!filme) {
-    res.render("edit", {
+    res.render("editar", {
       message: "Filme não foi encontrado!",
       type: "danger",
     });
   }
-  res.render("edit", {
+  res.render("editar", {
     filme,
     message: "Editado com sucesso",
     type:"success",
@@ -88,7 +90,7 @@ const edit1 = async (req, res) => {
 };
 
 //rota de edição do filme
-const edit = async (req, res) => {
+const editar = async (req, res) => {
   try {
     const filme = await Filme.findByPk(req.params.id);
     const { nome, descricao, imagem } = req.body;
@@ -109,20 +111,31 @@ const edit = async (req, res) => {
   }
 };
 
-
+//rota deletar o filme
+// const deletar = async (req, res) => {
+//   try {
+//     await Filme.destroy({ where: { id: req.params.id } });
+//     message = "Filme removido com sucesso",
+//     type = "success",
+//     res.redirect("/");
+//   } catch (err) {
+//     //deu erro, venha nesse caminho
+//     res.status(500).send({ err: err.message }); //vem do objeto erro
+//   }
+// };
 
 //rota da prof duda deletar
-const delet = async (req,res) => {
+const deletar = async (req,res) => {
   try{
     const filme = await Filme.findByPk(req.params.id);
 
     if(!filme){
-      res.render("delete", {
+      res.render("deletar", {
         message: "Filme não foi encontrado!",
         type: "danger",
       });
     }
-    res.render("delete", {
+    res.render("deletar", {
       filme, message:"",
     });
   }catch (err) {
@@ -131,11 +144,11 @@ const delet = async (req,res) => {
 }
 };
 
-const delet1 = async (req,res) => {
+const deletar1 = async (req,res) => {
   const filme = await Filme.findByPk(req.params.id);
 
   if(!filme){
-    res.render("delete", {
+    res.render("deletar", {
       message: "Filme não encontrado",
     });
   }
@@ -145,7 +158,7 @@ const delet1 = async (req,res) => {
 };
 
 //rota de pesquisar filme
-const findName = async (req, res) => {
+const pesquisaNome = async (req, res) => {
   try {
     const filme = await Filme.findAll({
       where: {
@@ -179,12 +192,11 @@ const findName = async (req, res) => {
 module.exports = {
   getAll,
   getById,
-  create,
-  creation,
-  edit1,
-  edit,
-  delet,
-  delet1,
-  findName,
- 
+  criar,
+  criacao,
+  editar1,
+  editar,
+  deletar,
+  deletar1,
+  pesquisaNome,
 };
