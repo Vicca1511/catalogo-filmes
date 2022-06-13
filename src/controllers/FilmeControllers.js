@@ -131,7 +131,7 @@ const delet = async (req,res) => {
 }
 };
 
-const delete1 = async (req,res) => {
+const delet1 = async (req,res) => {
   const filme = await Filme.findByPk(req.params.id);
 
   if(!filme){
@@ -184,7 +184,7 @@ module.exports = {
   edit1,
   edit,
   delet,
-  delete1,
+  delet1,
   findName,
  
 };

@@ -11,7 +11,7 @@
     <main>
         <div class="container">
             <span><% if(message != ""){ message } %></span>
-            <form method="POST" action="/deletar/<%= filme.id %>">
+            <form method="POST" action="/delet/<%= filme.id %>">
                 <div class="item">
                     <h2>Dejesa realmente deletar?</h2>
                     <span class="delecao"> <%= filme.nome %> 
