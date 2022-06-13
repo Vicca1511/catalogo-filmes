@@ -31,5 +31,9 @@ const Filme = database.sequelize.define(
         updateAt: false,
     }
 );
+const initTable = async () => {
+    await Filme.sync()
+}
+initTable();
 
 module.exports = Filme;//exportar o Filme
