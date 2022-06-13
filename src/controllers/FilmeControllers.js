@@ -41,7 +41,7 @@ const getById = async (req, res) => {
 };
 
 //rota de criação do filme
-const criar = (req, res) => {
+const create = (req, res) => {
   try {
     res.render("create", { message, type });
   } catch (err) {
@@ -50,7 +50,7 @@ const criar = (req, res) => {
   }
 };
 
-const criacao = async (req, res) => {
+const creation = async (req, res) => {
   try {
     const filme = req.body; //a requisição que vem do body, pegando os dados que vem do body
     if (
@@ -71,7 +71,7 @@ const criacao = async (req, res) => {
 };
 
 //rota editar filme
-const editar1 = async (req, res) => {
+const edit1 = async (req, res) => {
   const filme = await Filme.findByPk(req.params.id);
 
   if (!filme) {
@@ -88,7 +88,7 @@ const editar1 = async (req, res) => {
 };
 
 //rota de edição do filme
-const editar = async (req, res) => {
+const edit = async (req, res) => {
   try {
     const filme = await Filme.findByPk(req.params.id);
     const { nome, descricao, imagem } = req.body;
@@ -112,7 +112,7 @@ const editar = async (req, res) => {
 
 
 //rota da prof duda deletar
-const deletar = async (req,res) => {
+const delet = async (req,res) => {
   try{
     const filme = await Filme.findByPk(req.params.id);
 
@@ -131,7 +131,7 @@ const deletar = async (req,res) => {
 }
 };
 
-const deletar1 = async (req,res) => {
+const delete1 = async (req,res) => {
   const filme = await Filme.findByPk(req.params.id);
 
   if(!filme){
@@ -145,7 +145,7 @@ const deletar1 = async (req,res) => {
 };
 
 //rota de pesquisar filme
-const pesquisaNome = async (req, res) => {
+const findName = async (req, res) => {
   try {
     const filme = await Filme.findAll({
       where: {
@@ -179,11 +179,12 @@ const pesquisaNome = async (req, res) => {
 module.exports = {
   getAll,
   getById,
-  criar,
-  criacao,
-  editar1,
-  editar,
-  deletar,
-  deletar1,
-  pesquisaNome,
+  create,
+  creation,
+  edit1,
+  edit,
+  delet,
+  delete1,
+  findName,
+ 
 };
